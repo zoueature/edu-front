@@ -72,7 +72,7 @@ export default {
     }
   },
   updated() {
-    this.$refs.scrollbar.setScrollTop(this.$refs.scrollbar.wrapRef.scrollHeight)
+    this.$refs.scrollbar.setScrollTop(this.$refs.scrollbar.wrapRef.scrollHeight + 1000)
   },
   beforeUnmount() {
     this.ws.close()
