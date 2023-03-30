@@ -26,13 +26,25 @@
 
 <script>
 import url from "@/http/url";
+import {ElNotification} from "element-plus";
 
 export default {
   name: "ApplySchoolPage",
   methods: {
     async onSubmit() {
       let data = await this.$http.post(url.applySchool, this.form)
-      console.log(data)
+      if (data == null) {
+        return
+      }
+      ElNotification({
+        title: '提示',
+        message: '申请成功'
+      })
+      this.form.name = ''
+      this.form.country = ''
+      this.form.province = ''
+      this.form.city = ''
+      this.form.address = ''
     }
   },
   data() {

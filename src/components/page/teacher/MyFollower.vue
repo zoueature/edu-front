@@ -9,6 +9,11 @@
       <el-table-column prop="school.province" label="省份" width="180" />
       <el-table-column prop="school.city" label="城市" width="180" />
       <el-table-column prop="school.address" label="地址" width="180" />
+      <el-table-column label="操作">
+        <template #default="scope">
+          <el-button size="small" @click="chat(scope.row)">发送消息</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </el-scrollbar>
 </template>
@@ -24,6 +29,14 @@ export default {
     }
   },
   methods: {
+    chat(student) {
+      this.$router.push({
+        path: '/chat',
+        query: {
+          id: student.id
+        }
+      })
+    },
     async getApplyList() {
       let data = await this.$http.get(url.getTeacherFollowerList)
       console.log(data)

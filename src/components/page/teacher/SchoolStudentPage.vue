@@ -22,17 +22,13 @@
 import url from "@/http/url";
 
 export default {
-  name: "AdminSchoolStudentPage",
+  name: "SchoolStudentPage",
   data() {
     return {
       list: [],
     }
   },
   methods: {
-    async getStudentList() {
-      let data = await this.$http.get(url.getAdminSchoolStudentList)
-      this.list = data
-    },
     chat(student) {
       this.$router.push({
         path: '/chat',
@@ -40,6 +36,11 @@ export default {
           id: student.id
         }
       })
+    },
+    async getStudentList() {
+      let data = await this.$http.get(url.getSchoolStudentList)
+      console.log(data)
+      this.list = data
     }
   },
   mounted() {

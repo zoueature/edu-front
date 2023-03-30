@@ -22,7 +22,6 @@ export default {
       if (data == null) {
         return
       }
-      console.log(data.user.role !== localStorage.getItem('role'))
       if (data.user.role !== localStorage.getItem('role')) {
         this.$store.commit('setLogout')
         this.$router.replace({path: '/'})
@@ -37,7 +36,9 @@ export default {
     }
   },
   mounted() {
-    this.checkUserInfo()
+    if (this.$store.getters.logined || localStorage.getItem('access_token') != null) {
+      this.checkUserInfo()
+    }
   }
 }
 </script>
@@ -58,7 +59,7 @@ body {
 }
 .sidebar {
   display: flex;
-  width: 10%;
+  width: 16%;
   min-width: 55px;
 }
 .content {

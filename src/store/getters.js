@@ -7,5 +7,8 @@ export default {
     },
     role(state) {
         return state.userType
+    },
+    name(state) {
+        return state.name
     }
 }

@@ -132,7 +132,9 @@ export default {
         return
       }
       this.schoolList = schools
-      this.student.schoolId = schools[0].id
+      if (this.student.schoolId === 0) {
+        this.student.schoolId = schools[0].id
+      }
     },
     async addStudent() {
       let data = await this.$http.post(url.addStudent, this.student)
@@ -143,10 +145,19 @@ export default {
         title: "成功",
         message: "创建学生成功",
       })
+      this.student.schoolId = ''
+      this.student.name = ''
+      this.student.username = ''
+      this.student.password = ''
+      this.student.grade = 0
+      this.student.class = 0
     }
   },
   mounted() {
     this.getAdminSchoolList()
+    if (this.$route.query.school !== undefined) {
+     this.student.schoolId = +this.$route.query.school
+    }
   }
 }
 </script>

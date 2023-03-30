@@ -8,6 +8,7 @@ export default {
         state.userType = userInfo.role
         state.userId = userInfo.id
         state.isAdmin = userInfo.isAdmin
+        state.name = userInfo.name
         localStorage.setItem('role', userInfo.role)
     },
 

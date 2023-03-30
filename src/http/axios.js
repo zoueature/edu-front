@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 let http = axios.create({
+    // baseURL: "http://api.edu.eayang.com/api",
     baseURL: "http://127.0.0.1:8000/api",
     // baseURL: "/api" // in website
     // headers: {
@@ -28,6 +29,7 @@ function rejectHandler(router, store) {
             if (error.response) {
                 switch (error.response.status) {
                     case 401:
+                    case 403:
                         // 返回 401 清除token信息并跳转到登录页面
                         localStorage.removeItem("access_token")
                         store.commit('setLogout')
@@ -43,9 +45,10 @@ function rejectHandler(router, store) {
 }
 
 
-async function get(uri, params, callback = null) {
+async function get(uri, params, header = {}) {
     let resp = await http.get(uri, {
-        params: params
+        params: params,
+        headers: header,
     })
     if (resp.status !== 200) {
         return null
@@ -54,15 +57,11 @@ async function get(uri, params, callback = null) {
     if (data.code !== 0) {
         return null
     }
-    if (callback === null) {
-        return data.data;
-    } else {
-        callback(data.data)
-    }
+    return data.data
 }
 
-async function post(uri, params, callback = null) {
-    let resp = await http.post(uri, params)
+async function post(uri, params, header = {}) {
+    let resp = await http.post(uri, params, {headers: header})
     if (resp.status !== 200) {
         return null
     }
@@ -70,11 +69,8 @@ async function post(uri, params, callback = null) {
     if (data.code !== 0) {
         return null
     }
-    if (callback === null) {
-        return data.data;
-    } else {
-        callback(data.data)
-    }
+
+    return data.data
 }
 
 export function uploadFile(url, payload, cancelToken, cd) {

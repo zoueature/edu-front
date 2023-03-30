@@ -1,11 +1,7 @@
 <template>
-  <div class="sidebar-item">
-    <a :href="route">
-      <div class="menu">
-        <div class="icon"><img :src="imURL"></div>
-        <span>{{title}}</span>
-      </div>
-    </a>
+  <div class="sidebar-item" @click="goto(route)">
+    <div class="icon"><img :src="imURL"></div>
+    <span class="title">{{title}}</span>
   </div>
 </template>
 
@@ -24,7 +20,9 @@ export default {
   },
   name: "SidebarItem",
   methods: {
-
+    goto(route) {
+      this.$router.push({path: route})
+    }
   }
 }
 </script>
@@ -32,14 +30,27 @@ export default {
 <style scoped>
   .sidebar-item {
     width: 90%;
-    /*height: 50%;*/
+    height: 50px;
+    margin: 2px auto;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    cursor: pointer ;
   }
   .sidebar-item img {
     width: 100%;
     height: 100%;
   }
   .icon {
-    width: 32%;
+    width: 25px;
+    height: 25px;
+  }
+  .icon img {
+    width: 100%;
+    height: 100%;
+  }
+  .title {
+    margin-left: 10px;
   }
   .menu {
     display: flex;
@@ -49,5 +60,6 @@ export default {
   a {
     color: black;
     text-underline: none;
+    text-decoration: none;
   }
 </style>

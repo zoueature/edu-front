@@ -8,8 +8,8 @@ import store from './store'
 import VueCookies from 'vue3-cookies'
 
 
-import TeacherListPage from "@/components/page/student/teachers/TeacherListPage";
-import ChatPage from "@/components/page/student/chat/ChatPage";
+import TeacherListPage from "@/components/page/student/TeacherListPage";
+import ChatPage from "@/components/page/ChatPage";
 import LoginPage from "@/components/page/LoginPage";
 import RegisterPage from "@/components/page/RegisterPage";
 import ApplySchoolPage from "@/components/page/teacher/applySchool/ApplySchoolPage";
@@ -18,6 +18,10 @@ import SchoolApplyListPage from "@/components/page/teacher/applySchool/SchoolApp
 import MyFollower from "@/components/page/teacher/MyFollower";
 import AddStudentPage from "@/components/page/teacher/AddStudentPage";
 import AdminSchoolStudentPage from "@/components/page/teacher/AdminSchoolStudentPage";
+import AdminSchoolPage from "@/components/page/teacher/AdminSchoolPage";
+import BindUserPage from "@/components/page/BindUserPage";
+import SchoolStudentPage from "@/components/page/teacher/SchoolStudentPage";
+import FollowTeacherListPage from "@/components/page/student/FollowTeacherListPage";
 
 
 // 2. 定义一些路由
@@ -28,14 +32,18 @@ const routes = [
     { path: '/login', component:  LoginPage},
     { path: '/', component:  LoginPage},
     { path: '/register', component:  RegisterPage},
+    { path: '/oauth/auth', component:  BindUserPage},
 
     { path: '/school/apply', component:  ApplySchoolPage},
     { path: '/school/apply/list', component:  SchoolApplyListPage},
     { path: '/teacher/follower', component:  MyFollower},
     { path: '/teacher/add-student', component:  AddStudentPage},
     { path: '/admin/school/student', component:  AdminSchoolStudentPage},
+    { path: '/school/student', component:  SchoolStudentPage},
+    { path: '/admin/school', component:  AdminSchoolPage},
 
     { path: '/student/teachers', component: TeacherListPage },
+    { path: '/student/follow/teachers', component: FollowTeacherListPage },
 
 ]
 

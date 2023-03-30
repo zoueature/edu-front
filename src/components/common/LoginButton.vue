@@ -1,7 +1,7 @@
 <template>
   <div class="logbut">
     <el-avatar :size="50" :src="avatar" />
-    <span>{{'Hello'}}</span>
+    <span>{{name}}</span>
     <el-button type="danger" class="but" @click="logout">Logout</el-button>
   </div>
 </template>
@@ -17,9 +17,8 @@ export default {
       // return this.$store.getters.avatar
     },
     name() {
-      return  this.$store.name
-      // return this.$store.getters.avatar
-    }
+      return this.$store.getters.name
+    },
   },
   methods: {
     async logout() {

@@ -25,12 +25,36 @@ export default {
   name: "ChatPage",
   methods: {
     chat() {
+      this.pushMessage(this.input)
+      this.input = ''
+      console.log(this.$refs.scrollbar.wrapRef.scrollHeight)
+    },
+    pushMessage(msgContent) {
+      let sendMsg = JSON.stringify({
+        event: "chat",
+        msg: msgContent,
+      })
+      this.ws.send(sendMsg)
       this.msgs.push({
         type: 'to',
         msg: this.input,
       })
-      this.input = ''
-      console.log(this.$refs.scrollbar.wrapRef.scrollHeight)
+    },
+    receiveMessage(e) {
+      console.log(e.data)
+      this.msgs.push({
+        type: 'from',
+        msg: e.data,
+      })
+    },
+    onOpen() {
+
+    },
+    openChat() {
+      const url = 'ws://127.0.0.1:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.$route.query.id
+      this.ws = new WebSocket(url)
+      this.ws.onmessage = this.receiveMessage
+      this.ws.onopen = this.onOpen
     }
   },
   updated() {
@@ -39,41 +63,13 @@ export default {
   data() {
     return {
       input: '',
-      msgs: [
-        {
-          type: 'from',
-          msg: 'content',
-        },
-        {
-          type: 'to',
-          msg: 'content',
-        },
-        {
-          type: 'from',
-          msg: 'content',
-        },
-        {
-          type: 'to',
-          msg: 'content',
-        },
-        {
-          type: 'from',
-          msg: 'content',
-        },
-        {
-          type: 'to',
-          msg: 'content',
-        },{
-          type: 'from',
-          msg: 'content',
-        },{
-          type: 'to',
-          msg: 'content',
-        },
-
-
-      ]
+      msgs: [],
+      chatTo: 0,
     }
+  },
+  mounted() {
+    this.openChat()
+    this.chatTo = this.$route.query.id
   }
 }
 </script>
