@@ -64,7 +64,7 @@ export default {
 
     },
     openChat() {
-      const url = 'ws://127.0.0.1:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.$route.query.id
+      const url = 'ws://47.243.117.37:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.$route.query.id
       this.ws = new WebSocket(url)
       this.ws.onmessage = this.receiveMessage
       this.ws.onopen = this.onOpen
