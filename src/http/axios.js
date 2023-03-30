@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 let http = axios.create({
-    // baseURL: "http://api.edu.eayang.com/api",
-    baseURL: "http://127.0.0.1:8000/api",
+    baseURL: "http://api.edu.eayang.com/api",
+    // baseURL: "http://127.0.0.1:8000/api",
     // baseURL: "/api" // in website
     // headers: {
     //     Authorization : "Bearer " + (localStorage.getItem("access_token") == null ? '' : localStorage.getItem("access_token"))

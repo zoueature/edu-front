@@ -32,6 +32,7 @@ export default {
         query: {
           id: sender.id,
           name: sender.name,
+          role: sender.role,
         }
       })
     },

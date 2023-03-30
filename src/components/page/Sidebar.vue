@@ -29,7 +29,6 @@ export default {
       if (this.$store.getters.role === 'teacher') {
         menus = this.teacherMenu
       }
-      console.log(menus)
       return menus
     },
   },
@@ -79,6 +78,11 @@ export default {
           title: "我的学生",
           icon: 'graduation-cap.png',
         },
+        {
+          path: "/msgbox",
+          title: "未读消息",
+          icon: 'teacher.png',
+        }
       ],
       studentMenu: [
         {

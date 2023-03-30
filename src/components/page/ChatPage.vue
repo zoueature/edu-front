@@ -29,6 +29,10 @@ export default {
   methods: {
     async getChatHistory() {
       let loginRole = this.$store.getters.role
+      console.log({
+        userId: this.chatTo,
+        role: this.chatRole,
+      })
       let history = await this.$http.get(loginRole === 'teacher' ? url.teacherChatHistory : url.studentChatHistory, {
         userId: this.chatTo,
         role: this.chatRole,
@@ -60,11 +64,8 @@ export default {
         msg: e.data,
       })
     },
-    onOpen() {
-
-    },
     openChat() {
-      const url = 'ws://47.243.117.37:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.$route.query.id
+      const url = 'ws://47.243.117.37:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.chatTo + '&role=' + this.chatRole
       this.ws = new WebSocket(url)
       this.ws.onmessage = this.receiveMessage
       this.ws.onopen = this.onOpen
@@ -72,6 +73,9 @@ export default {
   },
   updated() {
     this.$refs.scrollbar.setScrollTop(this.$refs.scrollbar.wrapRef.scrollHeight)
+  },
+  beforeUnmount() {
+    this.ws.close()
   },
   data() {
     return {

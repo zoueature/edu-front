@@ -35,7 +35,7 @@ export default {
         query: {
           id: student.id,
           name: student.name,
-          role: student.role,
+          role: 'student',
         }
       })
     },
