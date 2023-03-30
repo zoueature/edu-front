@@ -56,9 +56,8 @@ export default {
         return
       }
 
-      // let loginURL = data['url']
-      // this.$router.push({path: '/oauth/auth'})
-      // window.location.href = loginURL
+      let loginURL = data['url']
+      window.location.href = loginURL
     }
   },
   data() {
