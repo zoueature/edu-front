@@ -90,6 +90,11 @@ export default {
           path: "/student/follow/teachers",
           title: "我关注的老师",
           icon: 'teacher.png',
+        },
+        {
+          path: "/msgbox",
+          title: "未读消息",
+          icon: 'teacher.png',
         }
       ]
     }

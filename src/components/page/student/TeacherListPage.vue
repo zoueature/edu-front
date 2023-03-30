@@ -30,7 +30,9 @@ export default {
       this.$router.push({
         path: '/chat',
         query: {
-          id: row.id
+          id: row.id,
+          name: row.name,
+          role: row.role,
         }
       })
     },

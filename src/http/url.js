@@ -18,6 +18,10 @@ export default {
     getSchoolStudentList: '/teacher/student',
     addStudent: '/teacher/student',
     inviteTeacher: '/teacher/invite',
+    teacherChatHistory: '/teacher/chat/history',
+    teacherUnreadMessage: '/teacher/unread/message',
+    readTeacherMessage: '/teacher/read/message',
+
 
 
     // student
@@ -25,4 +29,7 @@ export default {
     getFollowTeacherList: '/student/follow/teacher',
     followTeacher: '/student/teacher/follow',
     unfollowTeacher: '/student/teacher/unfollow',
+    studentChatHistory: '/student/chat/history',
+    studentUnreadMessage: '/student/unread/message',
+    readStudentMessage: '/student/read/message',
 }

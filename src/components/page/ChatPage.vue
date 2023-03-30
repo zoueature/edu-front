@@ -1,4 +1,5 @@
 <template>
+  <h2>与{{chatName}}的聊天</h2>
   <el-scrollbar class="chat-msg" ref="scrollbar">
     <div class="msg-content" v-for="(item, index) in msgs" :key="index">
       <div class="from-msg" v-if="item.type ==='from'">
@@ -21,9 +22,22 @@
 </template>
 
 <script>
+import url from "@/http/url";
+
 export default {
   name: "ChatPage",
   methods: {
+    async getChatHistory() {
+      let loginRole = this.$store.getters.role
+      let history = await this.$http.get(loginRole === 'teacher' ? url.teacherChatHistory : url.studentChatHistory, {
+        userId: this.chatTo,
+        role: this.chatRole,
+      })
+      if (history == null) {
+        return
+      }
+      this.msgs = history
+    },
     chat() {
       this.pushMessage(this.input)
       this.input = ''
@@ -41,7 +55,6 @@ export default {
       })
     },
     receiveMessage(e) {
-      console.log(e.data)
       this.msgs.push({
         type: 'from',
         msg: e.data,
@@ -65,11 +78,16 @@ export default {
       input: '',
       msgs: [],
       chatTo: 0,
+      chatRole: '',
+      chatName: '',
     }
   },
   mounted() {
-    this.openChat()
     this.chatTo = this.$route.query.id
+    this.chatName = this.$route.query.name
+    this.chatRole = this.$route.query.role
+    this.openChat()
+    this.getChatHistory()
   }
 }
 </script>

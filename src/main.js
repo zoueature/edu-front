@@ -22,6 +22,7 @@ import AdminSchoolPage from "@/components/page/teacher/AdminSchoolPage";
 import BindUserPage from "@/components/page/BindUserPage";
 import SchoolStudentPage from "@/components/page/teacher/SchoolStudentPage";
 import FollowTeacherListPage from "@/components/page/student/FollowTeacherListPage";
+import MsgBoxPage from "@/components/page/MsgBoxPage";
 
 
 // 2. 定义一些路由
@@ -44,6 +45,7 @@ const routes = [
 
     { path: '/student/teachers', component: TeacherListPage },
     { path: '/student/follow/teachers', component: FollowTeacherListPage },
+    { path: '/msgbox', component: MsgBoxPage },
 
 ]
 
