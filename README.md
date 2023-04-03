@@ -1,4 +1,4 @@
-# reader
+# Edu-front
 
 ## Project setup
 ```
