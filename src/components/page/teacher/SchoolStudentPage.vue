@@ -11,7 +11,7 @@
       <el-table-column prop="school.address" label="地址" width="180" />
       <el-table-column label="操作">
         <template #default="scope">
-          <el-button size="small" @click="chat(scope.row)">发送消息</el-button>
+          <el-button size="small" @click="chat(scope.row.student)">发送消息</el-button>
         </template>
       </el-table-column>
     </el-table>

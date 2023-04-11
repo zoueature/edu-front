@@ -31,7 +31,7 @@ export default {
         query: {
           id: row.id,
           name: row.name,
-          role: row.role,
+          role: 'teacher',
         }
       })
     },

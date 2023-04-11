@@ -7,6 +7,7 @@ export default {
     oauthAuth: '/oauth/auth',
     getBindUserList: '/oauth/bind/user',
     bindUser: '/oauth/bind/user',
+    unbindUser: '/oauth/unbind/user',
     switchUser: '/oauth/user/switch',
 
     //teacher

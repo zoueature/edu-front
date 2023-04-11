@@ -26,13 +26,12 @@ export default {
   name: "TeacherListPage",
   methods: {
     chat(index, row) {
-      console.log(index, row);
       this.$router.push({
         path: '/chat',
         query: {
           id: row.id,
           name: row.name,
-          role: row.role,
+          role: 'teacher',
         }
       })
     },

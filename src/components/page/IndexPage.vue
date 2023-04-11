@@ -28,6 +28,9 @@ export default {
         return
       }
       this.$store.commit('setLogin', data)
+    },
+    async init() {
+      await this.checkUserInfo()
     }
   },
   computed: {
@@ -35,9 +38,9 @@ export default {
       return this.$store.getters.logined
     }
   },
-  mounted() {
+  mounted()  {
     if (this.$store.getters.logined || localStorage.getItem('access_token') != null) {
-      this.checkUserInfo()
+      this.init()
     }
   }
 }

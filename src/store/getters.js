@@ -13,5 +13,8 @@ export default {
     },
     userId(state) {
         return state.userId
+    },
+    ws(state) {
+        return state.ws
     }
 }

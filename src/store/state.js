@@ -4,4 +4,5 @@ export default {
     userId: 0,
     name: '',
     isAdmin: false,
+    ws: null,
 }

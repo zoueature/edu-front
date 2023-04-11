@@ -45,14 +45,15 @@ export default {
     chat() {
       this.pushMessage(this.input)
       this.input = ''
-      console.log(this.$refs.scrollbar.wrapRef.scrollHeight)
     },
     pushMessage(msgContent) {
       let sendMsg = JSON.stringify({
         event: "chat",
         msg: msgContent,
+        userId: this.chatTo,
+        role: this.chatRole,
       })
-      this.ws.send(sendMsg)
+      this.$store.getters.ws.send(sendMsg)
       this.msgs.push({
         type: 'to',
         msg: this.input,
@@ -65,7 +66,7 @@ export default {
       })
     },
     openChat() {
-      const url = 'ws://47.243.117.37:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.chatTo + '&role=' + this.chatRole
+      const url = 'ws://192.168.31.44:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.chatTo + '&role=' + this.chatRole
       this.ws = new WebSocket(url)
       this.ws.onmessage = this.receiveMessage
       this.ws.onopen = this.onOpen
@@ -75,7 +76,7 @@ export default {
     this.$refs.scrollbar.setScrollTop(this.$refs.scrollbar.wrapRef.scrollHeight + 1000)
   },
   beforeUnmount() {
-    this.ws.close()
+    this.$store.commit('setWsNotify')
   },
   data() {
     return {
@@ -90,7 +91,8 @@ export default {
     this.chatTo = this.$route.query.id
     this.chatName = this.$route.query.name
     this.chatRole = this.$route.query.role
-    this.openChat()
+    this.$store.commit('setWsInChat', this.receiveMessage)
+    // this.openChat()
     this.getChatHistory()
   }
 }

@@ -4,14 +4,18 @@
     <el-button type="primary" @click="getBindUserList"> 刷新列表</el-button>
   </div>
   <div class="bind-list">
+    <h2>学生</h2>
     <div class="list-container" >
       <div v-for="(user, index) in bindUserList.student" :key="index" @click="switchUser('student', user.id)" class="bind-card">
         <el-card shadow="hover"> {{user.name}} </el-card>
+        <div class="unbind-button" @click.stop="unbind(user)">x</div>
       </div>
     </div>
     <div class="list-container">
+      <h2>教师</h2>
       <div v-for="(user, index) in bindUserList.teacher" :key="index" @click="switchUser('teacher', user.id)" class="bind-card">
         <el-card shadow="hover"> {{user.name}} </el-card>
+        <div class="unbind-button" @click.stop="unbind(user)">x</div>
       </div>
     </div>
   </div>
@@ -88,6 +92,21 @@ export default {
         title: '提示',
         message: '绑定成功',
       })
+      await this.getBindUserList()
+    },
+    async unbind(user) {
+      let data = await this.$http.post(url.unbindUser, {
+        userId: user.id,
+        role: user.role,
+      }, {Authorization: "Bearer " + this.token})
+      if (data == null) {
+        return
+      }
+      ElNotification({
+        title: '提示',
+        message: '解绑成功',
+      })
+      await this.getBindUserList()
     },
     async switchUser(role, userId) {
       let data = await this.$http.post(url.switchUser, {
@@ -147,5 +166,15 @@ export default {
 .bind-card {
   margin-bottom: 10px;
   cursor: pointer;
+  position: relative;
+}
+.unbind-button {
+  width: 20px;
+  height: 20px;
+  background: red;
+  color: white;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 </style>

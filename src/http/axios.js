@@ -1,8 +1,9 @@
 import axios from 'axios'
+import {ElNotification} from "element-plus";
 
 let http = axios.create({
-    baseURL: "https://poper-be-interview-01.herokuapp.com/api",
-    // baseURL: "http://127.0.0.1:8000/api",
+    // baseURL: "https://poper-be-interview-01.herokuapp.com/api",
+    baseURL: "http://192.168.31.44:8000/api",
     // baseURL: "/api" // in website
     // headers: {
     //     Authorization : "Bearer " + (localStorage.getItem("access_token") == null ? '' : localStorage.getItem("access_token"))
@@ -23,6 +24,12 @@ function rejectHandler(router, store) {
     );
     http.interceptors.response.use(
         response => {
+            if (response.data.code !== 0) {
+                ElNotification({
+                    title: "提示",
+                    message: response.data.msg,
+                })
+            }
             return response;
         },
         error => {
@@ -36,6 +43,12 @@ function rejectHandler(router, store) {
                         router.replace({
                             path: '/login',
                             query: {redirect: router.currentRoute.fullPath}
+                        })
+                        break
+                    default:
+                        ElNotification({
+                            title: "提示",
+                            message: "网络错误",
                         })
                 }
             }
