@@ -12,17 +12,18 @@ function initWs(state) {
         state.hasMsg = true
     }
     state.ws.onopen = function () {
-        // setInterval(function () {
-        //     state.ws.send(JSON.stringify({
-        //         event: "heartbeat",
-        //     }))
-        // }, 1000)
+        setInterval(function () {
+            state.ws.send(JSON.stringify({
+                event: "heartbeat",
+            }))
+        }, 1000)
     }
     state.ws.onclose = function () {
         let ws = new WebSocket(url)
         ws.onmessage = state.ws.onmessage
         ws.onopen = state.ws.onopen
         ws.onclose = state.ws.onclose
+        state.ws = ws
     }
 
 }
