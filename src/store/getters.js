@@ -16,5 +16,8 @@ export default {
     },
     ws(state) {
         return state.ws
+    },
+    hasMsg(state) {
+        return state.hasMsg
     }
 }

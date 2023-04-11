@@ -23,6 +23,7 @@
 
 <script>
 import url from "@/http/url";
+import {ElNotification} from "element-plus";
 
 export default {
   name: "ChatPage",
@@ -52,6 +53,8 @@ export default {
         msg: msgContent,
         userId: this.chatTo,
         role: this.chatRole,
+        senderName: this.$store.getters.name,
+        senderId: this.$store.getters.userId,
       })
       this.$store.getters.ws.send(sendMsg)
       this.msgs.push({
@@ -59,14 +62,39 @@ export default {
         msg: this.input,
       })
     },
+    joinRoom() {
+      let sendMsg = JSON.stringify({
+        event: "in",
+        userId: this.chatTo,
+        role: this.chatRole,
+      })
+      this.$store.getters.ws.send(sendMsg)
+    },
+    quitRoom() {
+      let sendMsg = JSON.stringify({
+        event: "out",
+        userId: this.chatTo,
+        role: this.chatRole,
+      })
+      this.$store.getters.ws.send(sendMsg)
+    },
     receiveMessage(e) {
+      let data = JSON.parse(e.data)
+      if (data.readed !== 1) {
+        // 别人的消息
+        ElNotification({
+          title: '收到' + data.sender.name + '的消息',
+          message: data.msg,
+        })
+        return
+      }
       this.msgs.push({
         type: 'from',
-        msg: e.data,
+        msg: data.msg,
       })
     },
     openChat() {
-      const url = 'ws://47.243.117.37:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.chatTo + '&role=' + this.chatRole
+      const url = 'ws://127.0.0.1:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.chatTo + '&role=' + this.chatRole
       this.ws = new WebSocket(url)
       this.ws.onmessage = this.receiveMessage
       this.ws.onopen = this.onOpen
@@ -77,6 +105,7 @@ export default {
   },
   beforeUnmount() {
     this.$store.commit('setWsNotify')
+    this.quitRoom()
   },
   data() {
     return {
@@ -91,6 +120,7 @@ export default {
     this.chatTo = this.$route.query.id
     this.chatName = this.$route.query.name
     this.chatRole = this.$route.query.role
+    this.joinRoom()
     this.$store.commit('setWsInChat', this.receiveMessage)
     // this.openChat()
     this.getChatHistory()

@@ -5,4 +5,5 @@ export default {
     name: '',
     isAdmin: false,
     ws: null,
+    hasMsg: false,
 }
