@@ -31,7 +31,9 @@ export default {
         state.isAdmin = userInfo.isAdmin
         state.name = userInfo.name
         localStorage.setItem('role', userInfo.role)
-        initWs(state)
+        if (state.ws == null) {
+            initWs(state)
+        }
     },
 
     setLogout(state) {
