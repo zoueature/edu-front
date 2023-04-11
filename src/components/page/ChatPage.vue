@@ -66,7 +66,7 @@ export default {
       })
     },
     openChat() {
-      const url = 'ws://192.168.31.44:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.chatTo + '&role=' + this.chatRole
+      const url = 'ws://47.243.117.37:18000/connect?token=' + localStorage.getItem('access_token') + '&userId=' + this.chatTo + '&role=' + this.chatRole
       this.ws = new WebSocket(url)
       this.ws.onmessage = this.receiveMessage
       this.ws.onopen = this.onOpen

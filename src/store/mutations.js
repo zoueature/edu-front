@@ -1,6 +1,6 @@
 import {ElNotification} from "element-plus";
 function initWs(state) {
-    const url = 'ws://192.168.31.44:18000/connect?token=' + localStorage.getItem('access_token')
+    const url = 'ws://47.243.117.37:18000/connect?token=' + localStorage.getItem('access_token')
     state.ws = new WebSocket(url)
     state.ws.onmessage = function(e) {
         ElNotification({
