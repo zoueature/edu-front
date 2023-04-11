@@ -55,6 +55,7 @@ export default {
         role: this.chatRole,
         senderName: this.$store.getters.name,
         senderId: this.$store.getters.userId,
+        senderRole: this.$store.getters.role,
       })
       this.$store.getters.ws.send(sendMsg)
       this.msgs.push({
