@@ -43,7 +43,10 @@ export default {
         state.isAdmin = false
         localStorage.removeItem('access_token')
         localStorage.removeItem('role')
-
+        if (state.ws != null) {
+            state.ws.close()
+            state.ws = null
+        }
     },
 
     setWsNotify(state) {
