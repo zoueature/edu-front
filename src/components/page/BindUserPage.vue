@@ -2,9 +2,13 @@
   <div class="bind-new">
     <el-button type="primary" @click="dialogVisible=true"> 绑定新用户</el-button>
     <el-button type="primary" @click="getBindUserList"> 刷新列表</el-button>
+    <div class="qrcode">
+      <img src="../../assets/qrcode.png">
+    </div>
+    <h3>扫码接收Line消息通知</h3>
   </div>
   <div class="bind-list">
-    <h2>学生</h2>
+    <h4>学生</h4>
     <div class="list-container" >
       <div v-for="(user, index) in bindUserList.student" :key="index" @click="switchUser('student', user.id)" class="bind-card">
         <el-card shadow="hover"> {{user.name}} </el-card>
@@ -12,7 +16,7 @@
       </div>
     </div>
     <div class="list-container">
-      <h2>教师</h2>
+      <h4>教师</h4>
       <div v-for="(user, index) in bindUserList.teacher" :key="index" @click="switchUser('teacher', user.id)" class="bind-card">
         <el-card shadow="hover"> {{user.name}} </el-card>
         <div class="unbind-button" @click.stop="unbind(user)">x</div>
@@ -156,12 +160,13 @@ export default {
 }
 .bind-new {
   margin-bottom: 50px;
+  display: flex;
 }
 .bind-list {
   display: flex;
 }
 .list-container {
-  width: 50%;
+  width: 45%;
 }
 .bind-card {
   margin-bottom: 10px;
@@ -176,5 +181,15 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
+}
+.qrcode {
+  width: 100px;
+  height: 100px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+.qrcode img {
+  width: 100%;
+  height: 100%;
 }
 </style>
